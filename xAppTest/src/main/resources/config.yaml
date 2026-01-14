@@ -1,0 +1,3 @@
+app:
+  name: "xAppTest"
+  env: ${APP_ENV:-dev}

@@ -1,0 +1,12 @@
+logging:
+  logDir: "devLogs"
+  rootLevel: TRACE
+  consoleAppender:
+    enabled: true
+    threshold: TRACE
+  fileAppender:
+    enabled: false
+    threshold: INFO
+  jsonAppender:
+    enabled: false
+    threshold: INFO

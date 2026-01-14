@@ -1,0 +1,12 @@
+logging:
+  logDir: "prodLogs"
+  rootLevel: INFO
+  consoleAppender:
+    enabled: true
+    threshold: INFO
+  fileAppender:
+    enabled: true
+    threshold: INFO
+  jsonAppender:
+    enabled: true
+    threshold: INFO
