@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktlint)
     application
 }
 
@@ -8,9 +9,6 @@ application {
 }
 
 val jdkVersion = libs.versions.jdk.get().toInt()
-
-group = "x"
-version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -21,12 +19,35 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":xConfig"))
     implementation(project(":xLogging"))
-    implementation(project(":xUtils"))
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlin.stdlib)
+}
 
-//    implementation(libs.dotenv.kotlin)
+tasks.withType<Jar>().configureEach {
+    manifest {
+        attributes["Main-Class"] = application.mainClass.get()
+    }
+}
 
-    implementation(libs.hoplite.core)
-    implementation(libs.hoplite.yaml)
+val fatJar = tasks.register<Jar>("fatJar") {
+    archiveClassifier.set("all")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from(
+        configurations.runtimeClasspath.get()
+            .filter { it.name.endsWith("jar") }
+            .map { zipTree(it) }
+    )
+}
+
+tasks.named("build") {
+    dependsOn(fatJar)
+}
+
+ktlint {
+    android.set(false)
+    ignoreFailures.set(true)
 }

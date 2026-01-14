@@ -1,0 +1,9 @@
+app:
+  name: "xEmptyApp"
+  env: ${APP_ENV:-dev}
+logging:
+  logDir: ${LOG_DIR:-logs}
+  rootLevel: ${LOG_ROOT_LEVEL:-INFO}
+  maxFileSize: ${LOG_MAX_FILE_SIZE:-100MB}
+  maxHistory: ${LOG_MAX_HISTORY:-14}
+  totalSizeCap: ${LOG_TOTAL_SIZE_CAP:-5GB}

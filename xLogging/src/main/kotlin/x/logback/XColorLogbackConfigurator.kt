@@ -72,7 +72,7 @@ class XColorLogbackConfigurator : ContextAwareBase(), Configurator {
     }
 
     private fun registerConverters() {
-        // Современный способ (logback 1.3+): через supplier-map. :contentReference[oaicite:4]{index=4}
+        // Современный способ (logback 1.3+): через supplier-map.
         PatternLayout.DEFAULT_CONVERTER_SUPPLIER_MAP["xcolor"] = Supplier { HighlightingCompositeConverterEx() }
     }
 }

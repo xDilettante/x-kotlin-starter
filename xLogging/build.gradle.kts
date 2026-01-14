@@ -1,11 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktlint)
 }
 
 val jdkVersion = libs.versions.jdk.get().toInt()
-
-group = "x.project"
-version = "unspecified"
 
 repositories {
     mavenCentral()
@@ -20,5 +18,9 @@ dependencies {
     api(libs.kotlin.logging)
     api(libs.logback.classic)
     api(libs.logstash.logback.encoder)
-    api(libs.dotenv.kotlin)
+}
+
+ktlint {
+    android.set(false)
+    ignoreFailures.set(true)
 }

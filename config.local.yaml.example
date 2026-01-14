@@ -1,0 +1,19 @@
+app:
+  name: "xAppTest-local"
+  env: dev
+
+logging:
+  logDir: "logs-local"
+  rootLevel: DEBUG
+  maxFileSize: 20MB
+  maxHistory: 3
+  totalSizeCap: 500MB
+  consoleAppender:
+    enabled: true
+    threshold: DEBUG
+  fileAppender:
+    enabled: false
+    threshold: INFO
+  jsonAppender:
+    enabled: false
+    threshold: INFO

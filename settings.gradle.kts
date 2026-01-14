@@ -23,5 +23,6 @@ rootProject.name = "xMySample"
 include("xUtils")
 include("xRayProto")
 include("xLogging")
+include("xConfig")
 
 include("xAppTest")

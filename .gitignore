@@ -1,5 +1,28 @@
-# Ignore Gradle project-specific cache directory
+# Gradle
 .gradle
+**/build/
+**/out/
+**/bin/
 
-# Ignore Gradle build output directory
-build
+# IDE / tooling
+.idea/
+*.iml
+.kotlin
+
+# Environment / secrets
+.env
+.env.*
+config.local.yaml
+
+# Logs
+logs/
+**/*.log
+
+# Binaries / archives
+*.class
+*.jar
+*.war
+*.ear
+
+# Backup/temporary
+*.kts~

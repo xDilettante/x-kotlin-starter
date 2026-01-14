@@ -1,11 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktlint)
 }
 
 val jdkVersion = libs.versions.jdk.get().toInt()
-
-group = "x.project"
-version = "unspecified"
 
 repositories {
     mavenCentral()
@@ -23,4 +21,16 @@ kotlin {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+ktlint {
+    android.set(false)
+    ignoreFailures.set(true)
 }

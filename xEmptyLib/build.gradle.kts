@@ -1,11 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktlint)
 }
 
 val jdkVersion = libs.versions.jdk.get().toInt()
-
-group = "x"
-version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -16,6 +14,10 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":xLogback"))
     implementation(libs.kotlin.stdlib)
+}
+
+ktlint {
+    android.set(false)
+    ignoreFailures.set(true)
 }

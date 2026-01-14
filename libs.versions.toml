@@ -11,18 +11,20 @@
     postgresql = "42.7.8"
     dotenv = "6.5.1"
     hoplite = "2.9.0"
-    logback = "1.5.19"
+    logback = "1.5.24"
     kotlin-logging = "7.0.13"
     klogging = "0.11.6"
+    junit = "5.11.3"
+    junit-platform = "1.11.3"
     jansi = "2.4.2"
     janino = "3.1.12"
     logstash-logback-encoder = "9.0"
     tgbotapi = "30.0.2"
-    protobuf-kotlin = "4.33.2"
-    grpc-stub = "1.77.0"
+    protobuf-kotlin = "4.33.4"
+    grpc-stub = "1.78.0"
     grpc-kotlin-stub = "1.5.0"
-    protobuf = "0.9.5"
-    protoc = "4.33.2"
+    protobuf = "0.9.6"
+    protoc = "4.33.4"
     sshd = "3.0.0-M2"
 
 [libraries]
@@ -93,6 +95,8 @@
     sshd-core = { module = "org.apache.sshd:sshd-core", version.ref = "sshd" }
     sshd-sftp = { module = "org.apache.sshd:sshd-sftp", version.ref = "sshd" }
 
+    junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+    junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
 
     #sample = { module = "", version.ref = "" }
     #sample = { module = "", version.ref = "" }
@@ -109,3 +113,5 @@
     kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
     kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
     protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }
+    versions = { id = "com.github.ben-manes.versions", version = "0.53.0" }
+    ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "12.1.1" }
