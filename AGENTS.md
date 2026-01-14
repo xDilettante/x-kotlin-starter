@@ -19,7 +19,7 @@
 
 ## Структура проекта и модули
 - Корень Gradle: `build.gradle.kts`, `settings.gradle.kts`, `libs.versions.toml`.
-- Активные модули: `xUtils`, `xLogging`, `xRayProto`, `xAppTest` (см. `settings.gradle.kts`).
+- Активные модули: `xUtils`, `xLogging`, `xRayProto`, `xConfig`, `xAppTest` (см. `settings.gradle.kts`).
 - Исходники Kotlin: `src/main/kotlin`, тесты: `src/test/kotlin`, ресурсы: `src/main/resources` и `src/test/resources`.
 - Прото-файлы: `xRayProto/src/main/proto`, генерация — плагин protobuf в Gradle.
 - `xEmptyApp` и `xEmptyLib` не подключены; использовать как шаблоны без изменения структуры модулей.
@@ -35,7 +35,7 @@
 - После изменения файлов `.proto` обязательно запускать:
     - `./gradlew :xRayProto:generateProto`
 - Политика коммита сгенерированных файлов:
-    - (выбрать одно) Сгенерированный код: [КОММИТИТСЯ / НЕ КОММИТИТСЯ].
+    - Сгенерированный код: НЕ КОММИТИТСЯ.
     - Если коммитится: убедиться, что после генерации `git diff` не содержит “случайных” изменений.
     - Если не коммитится: CI/сборка должны генерировать всё сами.
 

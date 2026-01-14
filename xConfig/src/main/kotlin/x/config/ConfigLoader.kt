@@ -5,8 +5,8 @@ import com.sksamuel.hoplite.ExperimentalHoplite
 import com.sksamuel.hoplite.addEnvironmentSource
 import com.sksamuel.hoplite.addFileSource
 import com.sksamuel.hoplite.addResourceSource
-import java.io.File
 import x.config.models.AppConfig
+import java.io.File
 
 @OptIn(ExperimentalHoplite::class)
 object ConfigLoader {
@@ -16,14 +16,15 @@ object ConfigLoader {
 
         val env = System.getProperty("APP_ENV") ?: "dev"
 
-        val config = ConfigLoaderBuilder.default()
-            .withExplicitSealedTypes() // ✅ включаем новый режим
-            .addEnvironmentSource()
-            .addResourceSource("/config.yaml")
-            .addResourceSource("/config-$env.yaml")
-            .addFileSource(File("config.local.yaml"), optional = true) // локальный override (не коммитим)
-            .build()
-            .loadConfigOrThrow<AppConfig>()
+        val config =
+            ConfigLoaderBuilder.default()
+                .withExplicitSealedTypes() // ✅ включаем новый режим
+                .addEnvironmentSource()
+                .addResourceSource("/config.yaml")
+                .addResourceSource("/config-$env.yaml")
+                .addFileSource(File("config.local.yaml"), optional = true) // локальный override (не коммитим)
+                .build()
+                .loadConfigOrThrow<AppConfig>()
 
         applyAppProperties(config)
         applyLoggingConfig(config)
@@ -51,7 +52,10 @@ object ConfigLoader {
         System.setProperty("LOG_MAX_HISTORY", logging.maxHistory.toString())
         System.setProperty("LOG_TOTAL_SIZE_CAP", logging.totalSizeCap)
 
-        fun threshold(enabled: Boolean, value: String) = if (enabled) value else "OFF"
+        fun threshold(
+            enabled: Boolean,
+            value: String,
+        ) = if (enabled) value else "OFF"
 
         System.setProperty("LOG_CONSOLE_THRESHOLD", threshold(logging.consoleAppender.enabled, logging.consoleAppender.threshold))
         System.setProperty("LOG_TEXT_THRESHOLD", threshold(logging.fileAppender.enabled, logging.fileAppender.threshold))

@@ -20,7 +20,6 @@ import java.util.function.Supplier
  * Срабатывает, если в приложении НЕТ logback.xml / logback-test.xml.
  */
 class XColorLogbackConfigurator : ContextAwareBase(), Configurator {
-
     override fun configure(context: LoggerContext): Configurator.ExecutionStatus {
         this.context = context
 
@@ -30,40 +29,44 @@ class XColorLogbackConfigurator : ContextAwareBase(), Configurator {
 
         registerConverters()
 
-        val pattern = System.getProperty(
-            "xlogback.pattern",
-            "%xcolor(%-5level) %white(%d{HH:mm:ss.SSS}) %magenta(%logger{24}) %cyan([%thread]) - %xcolor(%msg%n)"
-        )
+        val pattern =
+            System.getProperty(
+                "xlogback.pattern",
+                "%xcolor(%-5level) %white(%d{HH:mm:ss.SSS}) %magenta(%logger{24}) %cyan([%thread]) - %xcolor(%msg%n)",
+            )
 
         val rootLevel = System.getProperty("xlogback.level")?.let { Level.toLevel(it, Level.INFO) } ?: Level.INFO
 
-        val encoder = PatternLayoutEncoder().apply {
-            this.context = context
-            this.pattern = pattern
-            this.start()
-        }
-
-        val consoleAppender = ConsoleAppender<ILoggingEvent>().apply {
-            this.context = context
-            this.name = "XCOLOR_CONSOLE"
-            this.encoder = encoder
-
-            // На Windows/некоторых терминалах может помочь Jansi.
-            // Если метода нет в твоей версии — просто проигнорируем.
-            try {
-                this.isWithJansi = true
-            } catch (_: Throwable) {
-                // ничего
+        val encoder =
+            PatternLayoutEncoder().apply {
+                this.context = context
+                this.pattern = pattern
+                this.start()
             }
 
-            this.start()
-        }
+        val consoleAppender =
+            ConsoleAppender<ILoggingEvent>().apply {
+                this.context = context
+                this.name = "XCOLOR_CONSOLE"
+                this.encoder = encoder
 
-        val root = context.getLogger(Logger.ROOT_LOGGER_NAME).apply {
-            level = rootLevel
-            detachAndStopAllAppenders()
-            addAppender(consoleAppender)
-        }
+                // На Windows/некоторых терминалах может помочь Jansi.
+                // Если метода нет в твоей версии — просто проигнорируем.
+                try {
+                    this.isWithJansi = true
+                } catch (_: Throwable) {
+                    // ничего
+                }
+
+                this.start()
+            }
+
+        val root =
+            context.getLogger(Logger.ROOT_LOGGER_NAME).apply {
+                level = rootLevel
+                detachAndStopAllAppenders()
+                addAppender(consoleAppender)
+            }
 
         addInfo("x-logback-starter: включён цветной вывод в консоль, уровень=$rootLevel")
 

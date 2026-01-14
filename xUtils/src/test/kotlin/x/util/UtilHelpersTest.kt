@@ -6,7 +6,6 @@ import x.util.bytes.ByteSizeConverters
 import x.util.bytes.toKilobytes
 
 class UtilHelpersTest {
-
     @Test
     fun `decodeHex produces expected bytes`() {
         val bytes = "0a1b".decodeHex()

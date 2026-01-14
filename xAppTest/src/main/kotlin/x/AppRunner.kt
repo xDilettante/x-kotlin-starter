@@ -15,7 +15,6 @@ import kotlinx.coroutines.withTimeoutOrNull
 import x.config.models.AppConfig
 
 class AppRunner(private val config: AppConfig) {
-
     private val log by lazy { KotlinLogging.logger {} }
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
@@ -26,18 +25,21 @@ class AppRunner(private val config: AppConfig) {
 
         val shutdownSignal = CompletableDeferred<Unit>()
         // Хук на SIGTERM/CTRL+C, чтобы корректно завершить корутины
-        Runtime.getRuntime().addShutdownHook(Thread {
-            log.info { "Получен сигнал завершения, останавливаем приложение..." }
-            shutdownSignal.complete(Unit)
-        })
+        Runtime.getRuntime().addShutdownHook(
+            Thread {
+                log.info { "Получен сигнал завершения, останавливаем приложение..." }
+                shutdownSignal.complete(Unit)
+            },
+        )
 
-        val worker = scope.launch {
-            log.info { "Запускаем демонстрационную корутину" }
-            while (isActive) {
-                log.debug { "Работаем..." }
-                delay(200)
+        val worker =
+            scope.launch {
+                log.info { "Запускаем демонстрационную корутину" }
+                while (isActive) {
+                    log.debug { "Работаем..." }
+                    delay(200)
+                }
             }
-        }
 
         // Авто-стоп через небольшой таймаут, чтобы пример не зависал при запуске
         withTimeoutOrNull(1_000) {

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class SecretMaskingTest {
-
     @Test
     fun `masks long secrets keeping edges`() {
         val masked = maskSecret("abcd1234efgh5678")

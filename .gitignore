@@ -13,6 +13,7 @@
 .env
 .env.*
 config.local.yaml
+AGENTS.local.md
 
 # Logs
 logs/

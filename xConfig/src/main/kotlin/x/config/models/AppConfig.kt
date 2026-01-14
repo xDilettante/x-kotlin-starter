@@ -2,7 +2,7 @@ package x.config.models
 
 data class AppConfig(
     val app: AppSettings,
-    val logging: LoggingConfig = LoggingConfig()
+    val logging: LoggingConfig = LoggingConfig(),
 )
 
 data class AppSettings(
@@ -19,20 +19,20 @@ data class LoggingConfig(
     val totalSizeCap: String = "5GB",
     val consoleAppender: ConsoleAppender = ConsoleAppender(),
     val fileAppender: FileAppender = FileAppender(),
-    val jsonAppender: JsonAppender = JsonAppender()
+    val jsonAppender: JsonAppender = JsonAppender(),
 )
 
-data class ConsoleAppender (
+data class ConsoleAppender(
     val enabled: Boolean = true,
-    val threshold: String = "INFO"
+    val threshold: String = "INFO",
 )
 
-data class FileAppender (
+data class FileAppender(
     val enabled: Boolean = true,
-    val threshold: String = "INFO"
+    val threshold: String = "INFO",
 )
 
-data class JsonAppender (
+data class JsonAppender(
     val enabled: Boolean = true,
-    val threshold: String = "INFO"
+    val threshold: String = "INFO",
 )

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class UrlValidatorTest {
-
     @Test
     fun `adds default scheme when missing`() {
         val fixed = checkAndFixUrl("example.com")

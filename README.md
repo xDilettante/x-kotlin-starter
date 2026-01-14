@@ -50,8 +50,18 @@ java -jar build/libs/xAppTest-0.0.1-all.jar
 3. В `new-lib/build.gradle.kts` поправь `group/version` и зависимости, удали `Placeholder.kt`.
 4. Собери/протести: `./gradlew :new-lib:build`
 
+## Скрипты
+- `./scripts/new-app.sh <new-module-name>` — создаёт модуль приложения из `xEmptyApp` и заменяет имя в базовых файлах.
+- `./scripts/new-lib.sh <new-module-name>` — создаёт модуль библиотеки из `xEmptyLib` и удаляет `Placeholder.kt`.
+
+## Линт (ktlint)
+- Проверка стиля: `./gradlew ktlintCheck` (не фейлит сборку по умолчанию).
+- Автоисправление: `./gradlew ktlintFormat`.
+
 ## Прото/gRPC
 `xRayProto` генерирует код в пакетах `com.xray.*` (соответствует proto-схемам). Это не переносится под корневой пакет `x` и так и должно оставаться.
+
+Генерация кода: `./gradlew :xRayProto:generateProto`. Сгенерированный код не коммитится, модуль добавлен как пример работы с протобуф.
 
 ## CI
 В `.github/workflows/ci.yml` — базовый pipeline: JDK 21 + `./gradlew build`.
